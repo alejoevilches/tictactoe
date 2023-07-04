@@ -6,7 +6,7 @@ import confetti from 'canvas-confetti'
 import './App.css'
 import { Square } from './components/Square.jsx'
 import { turns, WINNER_COMBOS } from './constants.js'
-import { checkWinner } from './logic/board'
+import { checkWinner, checkEndGame } from './logic/board'
 
 function App() {
   const [board, setBoard]=useState(Array(9).fill(null));
@@ -27,10 +27,6 @@ function App() {
     } else if (checkEndGame(newBoard)){
       setWinner(false);
     }
-  }
-
-  const checkEndGame=(boardToCheck)=>{
-    return boardToCheck.every((square)=>square!=null);
   }
 
   const resetGame=()=>{
