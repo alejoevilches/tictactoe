@@ -59,6 +59,11 @@ function App() {
       alert(`El ganador es ${turn}`)
     }
   }
+  const resetGame=()=>{
+    setBoard(Array(9).fill(null));
+    setTurn(turns.X);
+    setWinner(null);
+  }
   return (
     <main className='board'>
       <h1>Tic tac toe</h1>
@@ -78,6 +83,21 @@ function App() {
         <Square isSelected={turn==turns.X}>{turns.X}</Square>
         <Square isSelected={turn==turns.O}>{turns.O}</Square>
       </section>
+      {
+        winner!=null && (
+          <section className='winner'>
+            <div className="text">
+              <h2>{winner == false ? "Empate" : `El ganador es:`}</h2>
+              <header className='win'>
+                {winner && <Square>{winner}</Square>}
+              </header>
+            </div>
+            <footer>
+              <button onClick={resetGame}>Empezar de nuevo</button>
+            </footer>
+          </section>
+        )
+      }
     </main>
   );
 }
