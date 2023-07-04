@@ -46,6 +46,7 @@ function App() {
   const [board, setBoard]=useState(Array(9).fill(null));
   const [turn, setTurn]=useState(turns.X)
   const [winner, setWinner] = useState(null);
+
   const updateBoard=(index)=>{
     if (board[index] || winner) return;
     const newTurn = turn == turns.O ? turns.X : turns.O; 
@@ -57,8 +58,15 @@ function App() {
     if (newWinner){
       setWinner(newWinner);
       alert(`El ganador es ${turn}`)
+    } else if (checkEndGame(newBoard)){
+      setWinner(false);
     }
   }
+
+  const checkEndGame=(boardToCheck)=>{
+    return boardToCheck.every((square)=>square!=null);
+  }
+
   const resetGame=()=>{
     setBoard(Array(9).fill(null));
     setTurn(turns.X);
