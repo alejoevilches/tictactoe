@@ -2,6 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import confetti from 'canvas-confetti'
 import './App.css'
 
 const turns={
@@ -57,7 +58,7 @@ function App() {
     const newWinner=checkWinner(newBoard);
     if (newWinner){
       setWinner(newWinner);
-      alert(`El ganador es ${turn}`)
+      confetti();
     } else if (checkEndGame(newBoard)){
       setWinner(false);
     }
