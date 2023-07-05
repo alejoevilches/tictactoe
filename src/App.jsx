@@ -7,6 +7,7 @@ import './App.css'
 import { Square } from './components/Square.jsx'
 import { turns, WINNER_COMBOS } from './constants.js'
 import { checkWinner, checkEndGame } from './logic/board'
+import { saveGame, restartStorage } from './logic/storage';
 
 function App() {
   const [board, setBoard]=useState(()=>{
@@ -26,8 +27,7 @@ function App() {
     let newBoard=[...board];
     newBoard[index]=turn;
     setBoard(newBoard);
-    window.localStorage.setItem("board", JSON.stringify(newBoard));
-    window.localStorage.setItem("turn", JSON.stringify(newTurn));
+    saveGame(newBoard, newTurn);
     const newWinner=checkWinner(newBoard);
     if (newWinner){
       setWinner(newWinner);
@@ -41,9 +41,7 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurn(turns.X);
     setWinner(null);
-    window.localStorage.removeItem("board");
-    window.localStorage.removeItem("turn");
-
+    restartStorage();
   }
   return (
     <main className='board'>
