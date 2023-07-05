@@ -9,7 +9,10 @@ import { turns, WINNER_COMBOS } from './constants.js'
 import { checkWinner, checkEndGame } from './logic/board'
 
 function App() {
-  const [board, setBoard]=useState(Array(9).fill(null));
+  const [board, setBoard]=useState(()=>{
+    const boardFromStorage=window.localStorage.getItem("board");
+    return boardFromStorage ? JSON.parse(boardFromStorage) : Array(9).fill(null);
+  });
   const [turn, setTurn]=useState(turns.X)
   const [winner, setWinner] = useState(null);
 
@@ -20,10 +23,12 @@ function App() {
     let newBoard=[...board];
     newBoard[index]=turn;
     setBoard(newBoard);
+    window.localStorage.setItem("board", JSON.stringify(newBoard));
+    window.localStorage.setItem("turn", JSON.stringify(turn));
     const newWinner=checkWinner(newBoard);
     if (newWinner){
       setWinner(newWinner);
-      confetti();gi
+      confetti();
     } else if (checkEndGame(newBoard)){
       setWinner(false);
     }
