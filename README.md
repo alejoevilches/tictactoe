@@ -12,7 +12,7 @@ This project was made using React + Vite. It helps me to fully understand the us
 ## Installation
 Clone this repository
 ```bash
-git clone https://github.com/alejoevilches/react-crashcourse
+git clone https://github.com/alejoevilches/tictactoe
 ```
 Install it using this commands
 
